@@ -62,17 +62,23 @@ public class MyUtils {
      * @return formatted date
      */
 
-    public static String convertDate(String originalDate, String originalFormat, String targetFormat) {
+    public static String convertDate(String originalDate, String originalFormat, String targetFormat, boolean... error) {
 
-        SimpleDateFormat sourceFormat = new SimpleDateFormat(originalFormat);
-        SimpleDateFormat desiredFormat = new SimpleDateFormat(targetFormat);
+        SimpleDateFormat sourceFormat = null, desiredFormat = null;
         Date date = null;
 
         try {
+            sourceFormat = new SimpleDateFormat(originalFormat);
+            desiredFormat = new SimpleDateFormat(targetFormat);
+
             date = sourceFormat.parse(originalDate);
         } catch (Exception e) {
             e.printStackTrace();
-            return "";
+            if(error.length>0 && error[0]) {
+                return e.getMessage();
+            }else{
+                return "";
+            }
         }
 
         return desiredFormat.format(date.getTime());
