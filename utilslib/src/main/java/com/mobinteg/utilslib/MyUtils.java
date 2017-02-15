@@ -10,6 +10,7 @@ import android.view.Display;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class MyUtils {
 
@@ -62,14 +63,14 @@ public class MyUtils {
      * @return formatted date
      */
 
-    public static String convertDate(String originalDate, String originalFormat, String targetFormat, boolean... error) {
+    public static String convertDate(String originalDate, String originalFormat, String targetFormat, Locale locale, boolean... error) {
 
         SimpleDateFormat sourceFormat = null, desiredFormat = null;
         Date date = null;
 
         try {
-            sourceFormat = new SimpleDateFormat(originalFormat);
-            desiredFormat = new SimpleDateFormat(targetFormat);
+            sourceFormat = new SimpleDateFormat(originalFormat, locale);
+            desiredFormat = new SimpleDateFormat(targetFormat, locale);
 
             date = sourceFormat.parse(originalDate);
         } catch (Exception e) {
