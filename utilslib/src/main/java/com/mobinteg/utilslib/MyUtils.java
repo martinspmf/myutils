@@ -63,14 +63,14 @@ public class MyUtils {
      * @return formatted date
      */
 
-    public static String convertDate(String originalDate, String originalFormat, String targetFormat, Locale locale, boolean... error) {
+    public static String convertDate(String originalDate, String originalFormat, String targetFormat, Locale originLocale, Locale targetLocale, boolean... error) {
 
         SimpleDateFormat sourceFormat = null, desiredFormat = null;
         Date date = null;
 
         try {
-            sourceFormat = new SimpleDateFormat(originalFormat, locale);
-            desiredFormat = new SimpleDateFormat(targetFormat, locale);
+            sourceFormat = new SimpleDateFormat(originalFormat, originLocale);
+            desiredFormat = new SimpleDateFormat(targetFormat, targetLocale);
 
             date = sourceFormat.parse(originalDate);
         } catch (Exception e) {
